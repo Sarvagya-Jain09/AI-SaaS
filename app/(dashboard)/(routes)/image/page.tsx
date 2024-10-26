@@ -9,15 +9,15 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Image from "next/image";
 import toast from "react-hot-toast";
+// import { AxiosError } from "axios";
 
 //local/internal imports
 import Heading from "@/components/heading";
-import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import {Input} from "@/components/ui/input"
 import { Button } from "@/components/ui/button";
 import Empty from "@/components/empty";
 import Loader from "@/components/loader";
-import { cn } from "@/lib/utils";
 import { Select, 
     SelectContent, 
     SelectItem, 
@@ -55,9 +55,9 @@ const ImagePage = ()=>{
             setImages(urls);
             form.reset();
         }
-        catch (error:any)
+        catch (error:unknown)
         {
-            if(error?.response?.status === 403)
+            if(axios.isAxiosError(error) && error.response?.status === 403)
             {
                 proModal.onOpen();
             }else{

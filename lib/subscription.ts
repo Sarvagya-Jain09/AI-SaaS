@@ -21,11 +21,11 @@ export const checkUserSubscription = async ()=>{
         }
     })
 
-    if(!userSubscription)
-    {
-        return false
+    if (!userSubscription || !userSubscription.stripePriceId || !userSubscription.stripeCurrentPeriodEnd) {
+        return false;
     }
-    const isValid = userSubscription.stripePriceId && 
-    userSubscription.stripeCurrentPeriodEnd?.getTime()! + DAY_IN_MS > Date.now()
-    return !!isValid
+
+    const isValid = userSubscription.stripeCurrentPeriodEnd.getTime() + DAY_IN_MS > Date.now();
+    return isValid;
+
 }

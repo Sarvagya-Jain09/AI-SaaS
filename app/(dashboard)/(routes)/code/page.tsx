@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { ChatCompletionMessageParam } from "openai/resources/index.mjs";
 import Markdown from 'react-markdown';
+// import { AxiosError } from "axios";
 
 //local/internal imports
 import Heading from "@/components/heading";
@@ -51,9 +52,9 @@ const CodePage = ()=>{
             setMessages((current) => [...current,userMessage,response.data])
             form.reset();
         }
-        catch (error:any)
+        catch (error: unknown)
         {
-            if(error?.response?.status === 403)
+            if(axios.isAxiosError(error) && error.response?.status === 403)
             {
                 proModal.onOpen();
             }
@@ -98,17 +99,17 @@ const CodePage = ()=>{
                         <Empty label="No Conversation started!"/>
                     )}
                     <div className="flex flex-col-reverse gap-y-4">
-                        {messages.map((msg)=>(
-                            <div className={cn('p-8 w-full flex items-start gap-x-8 rounded-lg',msg.role==='user' ? 
+                        {messages.map((msg,index)=>(
+                            <div key={index} className={cn('p-8 w-full flex items-start gap-x-8 rounded-lg',msg.role==='user' ? 
                                 'bg-white border border-black/10' : ' bg-muted')}>
                                     {msg.role==='user'? <UserAvatar/> : <BotAvatar/>}
                                 <Markdown components={{
-                                    code({node,...props}){
+                                    code({...props}){
                                         return (
                                             <code className="bg-black/10 rounded-lg p-1" {...props}/>
                                         )
                                     },
-                                    pre({node,...props}){
+                                    pre({...props}){
                                         return(
                                             <div className="overflow-auto rounded-lg p-2 my-2 w-full bg-black/10">
                                                 <pre {...props}/>

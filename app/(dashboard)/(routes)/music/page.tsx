@@ -7,12 +7,11 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { ChatCompletionMessageParam } from "openai/resources/index.mjs";
 
 //local/internal imports
 import Heading from "@/components/heading";
 import { formSchema } from "./constants";
-import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import {Input} from "@/components/ui/input"
 import { Button } from "@/components/ui/button";
 import Empty from "@/components/empty";
@@ -38,7 +37,7 @@ const MusicPage = ()=>{
             setMusic(response.data.audio)
             form.reset();
         }
-        catch (error:any)
+        catch (error)
         {
             //TODO : Pro Model
             console.log(error);

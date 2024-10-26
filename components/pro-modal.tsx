@@ -1,7 +1,7 @@
 "use client"
 
-import axios from "axios";
-import { useState } from "react";
+// import axios from "axios";
+// import { useState } from "react";
 import {  Check, Code, Image, MessageSquare, Music, Video, Zap } from "lucide-react";
 
 import { useProModal } from "@/app/hooks/use-pro-modal"
@@ -16,7 +16,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import toast from "react-hot-toast";
+// import toast from "react-hot-toast";
 
 
 export const ProModal =()=>{
@@ -51,7 +51,11 @@ export const ProModal =()=>{
       }]
 
     const proModal = useProModal();
-    const [loading,setLoading] = useState(false);
+    // const [loading,setLoading] = useState(false);
+
+
+    //*** Uncomment this part and set onClick = {onSubscribe} for button if u can set up stripe/
+    //***Also uncomment the respective import statements */
     // const onSubscribe = async ()=>{
     //     try{
     //         setLoading(true)
@@ -98,7 +102,7 @@ export const ProModal =()=>{
                     </DialogDescription>
                 </DialogHeader>
                 <DialogFooter>
-                    <Button disabled={loading} size="lg" variant="premium" className="w-full font-bold">
+                    <Button  size="lg" variant="premium" className="w-full font-bold">
                         Update to Pro!
                         <Zap className="h-4 w-4 ml-2 fill-white"/>
                     </Button>

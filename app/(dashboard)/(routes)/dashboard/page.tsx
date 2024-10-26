@@ -2,7 +2,7 @@
 
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { ArrowRight, Code, Image, MessageSquare, Music, Settings, Video } from "lucide-react";
+import { ArrowRight, Code, Image, MessageSquare, Music, Video } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 const DashboardPage = ()=> {

@@ -4,7 +4,6 @@ import { NextResponse } from "next/server";
 
 import prismadb from "@/lib/prismadb";
 import { stripe } from "@/lib/stripe";
-import { Session } from "inspector/promises";
 
 export async function POST(req : Request)
 {
@@ -18,9 +17,13 @@ export async function POST(req : Request)
             process.env.STRIPE_WEBHOOK_SECRET!
         )
     }
-    catch(error : any)
+    catch(error: unknown)
     {
-        return new NextResponse(`Webhook error ${error.message}`,{status:400})
+        if (error instanceof Error) {
+            return new NextResponse(`Webhook error ${error.message}`, { status: 400 });
+        } else {
+            return new NextResponse("An unknown error occurred", { status: 400 });
+        }
     }
 
     const session = event.data.object as Stripe.Checkout.Session;
